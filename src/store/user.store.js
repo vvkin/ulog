@@ -1,6 +1,19 @@
-import * as authStore from './auth.store';
+import { makeAutoObservable, runInAction } from 'mobx';
 
-export const getUser = () => {
-  const userId = authStore.getUserId();
-  return { userId };
-};
+export class UserStore {
+    id = null
+
+    constructor(userId) {
+        this.id = userId;
+        makeAutoObservable(this, {
+            id: false,
+            dispose: false
+        });
+    }
+
+    async load() {
+        runInAction(() => {
+            this.username = this.id;
+        })
+    }
+}
