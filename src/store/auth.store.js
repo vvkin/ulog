@@ -1,28 +1,36 @@
 import { makeAutoObservable } from 'mobx';
-import * as localStorageStore from './local-storage.store';
+import { localStorageStore } from './local-storage.store';
 
 const AUTH_STATE_KEY = 'auth';
 
 const state = makeAutoObservable({
-    userId: null,
+  userId: null,
 });
 
-export const isAuthenticated = () => state.userId !== null;
+const isAuthenticated = () => state.userId !== null;
 
-export const setAuthState = ({ userId }) => {
-    state.userId = userId;
-    localStorageStore.saveToStore(AUTH_STATE_KEY, JSON.stringify({ userId }));
+const setAuthState = ({ userId }) => {
+  state.userId = userId;
+  localStorageStore.saveToStore(AUTH_STATE_KEY, JSON.stringify({ userId }));
 };
 
-export const resetAuthState = () => {
-    state.userId = null;
-    localStorageStore.removeFromStore(AUTH_STATE_KEY);
+const resetAuthState = () => {
+  state.userId = null;
+  localStorageStore.removeFromStore(AUTH_STATE_KEY);
 };
 
-export const getUserId = () => {
-    return state.userId;
+const getUserId = () => {
+  return state.userId;
 };
 
-export const getSessionId = () => {
-    return state.userId;
-}
+const getSessionId = () => {
+  return state.userId;
+};
+
+export const authStore = {
+  isAuthenticated,
+  setAuthState,
+  resetAuthState,
+  getUserId,
+  getSessionId,
+};

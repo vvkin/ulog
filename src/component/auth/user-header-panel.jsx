@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { AppBar, Toolbar, Typography, Button, Box, Stack } from '@mui/material';
 
 import { useStore } from '../../store';
-import * as authService from '../../service/auth.service';
+import { authService } from '../../service/auth.service';
 
 export const UserHeaderPanel = observer(({ userStore }) => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ export const UserHeaderPanel = observer(({ userStore }) => {
   const handleLogout = async (event) => {
     event.preventDefault();
     try {
-      await authService.logout();
+      await authService.logout({ sessionId: userStore.id });
     } finally {
       authStore.resetAuthState();
       navigate(0);

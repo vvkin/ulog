@@ -1,19 +1,13 @@
-import { useNavigate } from 'react-router-dom';
-import { useStore } from '../store';
+import { Box } from '@mui/material';
+
+import { LoginForm } from '../component/auth/login-form';
+import { AuthHeader } from '../component/auth/auth-header';
 
 export const LoginPage = () => {
-  const { authStore } = useStore();
-  const navigate = useNavigate();
-
-  const handleLogin = (event) => {
-    event.preventDefault();
-    authStore.setAuthState({ userId: 'johndoe' });
-    navigate('/');
-  };
-
   return (
-    <div>
-      <button onClick={(evt) => handleLogin(evt)}>Login</button>
-    </div>
+    <Box sx={{ padding: '30px 0', fontFamily: 'default' }}>
+      <AuthHeader body="Login" />
+      <LoginForm></LoginForm>
+    </Box>
   );
 };

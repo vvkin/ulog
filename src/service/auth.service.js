@@ -1,15 +1,31 @@
-export const logout = async () => {
-    // no-op
+// eslint-disable-next-line no-unused-vars
+const logout = async ({ sessionId }) => {
+  // no-op
 };
 
-export const register = async () => {
-    // no-op
+// eslint-disable-next-line no-unused-vars
+const register = async ({ login, password }) => {
+  // no-op
 };
 
-export const login = async () => {
-    // no-op
+// eslint-disable-next-line no-unused-vars
+const login = async ({ login, password }) => {
+  return { userId: login };
 };
 
-export const refreshSession = async (sessionId) => {
-    // no-op
-}
+// eslint-disable-next-line no-unused-vars
+const loginViaRecent = async ({ sessionId }) => {
+  // no-op
+};
+
+// eslint-disable-next-line no-unused-vars
+const refreshSession = async (sessionId) => {
+  // no-op
+};
+
+export const authService = {
+  login,
+  register,
+  logout,
+  refreshSession,
+};

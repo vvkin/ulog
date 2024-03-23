@@ -1,6 +1,5 @@
-import * as authStore from './auth.store';
-import * as userStore from './user.store';
+import { authStore } from './auth.store';
 
 export const useStore = () => ({
-    authStore: authStore,
+  authStore,
 });

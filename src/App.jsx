@@ -5,7 +5,7 @@ import { LinearProgress } from '@mui/material';
 import { AppPublic } from './app/AppPublic';
 import { AppPrivate } from './app/AppPrivate';
 import { useStore } from './store';
-import * as authService from './service/auth.service';
+import { authService } from './service/auth.service';
 
 export const App = () => {
   const { authStore } = useStore();
