@@ -1,9 +1,19 @@
-function App() {
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import { AppPublic } from './app/AppPublic';
+import { AppPrivate } from './app/AppPrivate';
+
+export const App = () => {
   return (
     <>
-      <h1>ULog</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/auth/*" element={<AppPublic />} />
+          <Route path="*" element={<AppPrivate />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
-}
+};
 
 export default App;
