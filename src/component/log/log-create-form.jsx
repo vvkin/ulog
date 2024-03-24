@@ -7,16 +7,9 @@ import {
   MenuItem,
   Stack,
 } from '@mui/material';
-import {
-  SentimentNeutral,
-  SentimentSatisfied,
-  SentimentDissatisfied,
-  Filter1,
-  Filter2,
-  Filter3,
-} from '@mui/icons-material';
+import { LogMood } from './log-mood';
+import { LogPriority } from './log-priority';
 
-import { LogSelectItemInner } from './log-select-item';
 import { formatDateToDatetimeLocal } from '../../lib/date.utils';
 
 export const LogCreateForm = ({ onSubmit, moodOptions, priorityOptions }) => {
@@ -39,10 +32,6 @@ export const LogCreateForm = ({ onSubmit, moodOptions, priorityOptions }) => {
 
   return (
     <Stack
-      sx={{
-        width: '350px',
-        margin: '0 auto',
-      }}
       direction="column"
       spacing={2}
       component="form"
@@ -62,7 +51,7 @@ export const LogCreateForm = ({ onSubmit, moodOptions, priorityOptions }) => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <Stack direction="row" spacing={4}>
+      <Stack direction="row" spacing={4} justifyContent="space-around">
         <Select
           id="log__create__mood"
           size="small"
@@ -74,7 +63,7 @@ export const LogCreateForm = ({ onSubmit, moodOptions, priorityOptions }) => {
         >
           {moodOptions.map(({ id, value }, idx) => (
             <MenuItem key={idx} value={id}>
-              <LogSelectItemInner text={value} icon={mapMoodToIcon(value)} />
+              <LogMood name={value} />
             </MenuItem>
           ))}
         </Select>
@@ -89,10 +78,7 @@ export const LogCreateForm = ({ onSubmit, moodOptions, priorityOptions }) => {
         >
           {priorityOptions.map(({ id, value }, idx) => (
             <MenuItem key={idx} value={id}>
-              <LogSelectItemInner
-                text={value}
-                icon={mapPriorityToIcon(value)}
-              />
+              <LogPriority name={value} />
             </MenuItem>
           ))}
         </Select>
@@ -122,20 +108,4 @@ export const LogCreateForm = ({ onSubmit, moodOptions, priorityOptions }) => {
       </Button>
     </Stack>
   );
-};
-
-const mapMoodToIcon = (moodKey) => {
-  return {
-    positive: <SentimentSatisfied fontSize="small" color="success" />,
-    neutral: <SentimentNeutral fontSize="small" />,
-    negative: <SentimentDissatisfied fontSize="small" color="error" />,
-  }[moodKey];
-};
-
-const mapPriorityToIcon = (priorityKey) => {
-  return {
-    low: <Filter1 size="small" color="info" />,
-    medium: <Filter2 size="small" color="warning" />,
-    high: <Filter3 size="small" color="error" />,
-  }[priorityKey];
 };
