@@ -45,14 +45,19 @@ const getLogsByUserId = async (userId) => {
 
 const searchLogsByUserId = async ({ userId, query, sort }) => {
   const allLogs = await getLogsByUserId(userId);
-  const filteredLogs = query
-    ? allLogs.filter((log) => log.title.toLowerCase().startsWith(query))
+  const lowerCaseQuery = query?.toLowerCase();
+  const filteredLogs = lowerCaseQuery
+    ? allLogs.filter((log) =>
+        log.title.toLowerCase().startsWith(lowerCaseQuery),
+      )
     : allLogs;
-  if (!sort) {
-    return filteredLogs;
-  }
   const sortMultiplier = sort === 'asc' ? 1 : -1;
   return filteredLogs.sort((a, b) => (a.id - b.id) * sortMultiplier);
+};
+
+const getLogById = async ({ logId, userId }) => {
+  const allLogs = await getLogsByUserId(userId);
+  return allLogs.find((log) => log.id === logId) ?? null;
 };
 
 const getLogsFromStoreByUserId = (userId) => {
@@ -68,4 +73,5 @@ export const logService = {
   createLog,
   getLogsByUserId,
   searchLogsByUserId,
+  getLogById,
 };

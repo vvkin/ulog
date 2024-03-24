@@ -1,12 +1,5 @@
 import { useState } from 'react';
-import {
-  TextField,
-  Button,
-  Typography,
-  Select,
-  MenuItem,
-  Stack,
-} from '@mui/material';
+import { TextField, Button, Typography, MenuItem, Stack } from '@mui/material';
 import { LogMood } from './log-mood';
 import { LogPriority } from './log-priority';
 
@@ -52,11 +45,12 @@ export const LogCreateForm = ({ onSubmit, moodOptions, priorityOptions }) => {
         onChange={(e) => setTitle(e.target.value)}
       />
       <Stack direction="row" spacing={4} justifyContent="space-around">
-        <Select
+        <TextField
           id="log__create__mood"
           size="small"
           fullWidth
           required
+          select
           label="Mood"
           value={mood}
           onChange={(e) => setMood(e.target.value)}
@@ -66,12 +60,13 @@ export const LogCreateForm = ({ onSubmit, moodOptions, priorityOptions }) => {
               <LogMood name={value} />
             </MenuItem>
           ))}
-        </Select>
-        <Select
+        </TextField>
+        <TextField
           id="log__create__priority"
           size="small"
           fullWidth
           required
+          select
           label="Priority"
           value={priority}
           onChange={(e) => setPriority(e.target.value)}
@@ -81,7 +76,7 @@ export const LogCreateForm = ({ onSubmit, moodOptions, priorityOptions }) => {
               <LogPriority name={value} />
             </MenuItem>
           ))}
-        </Select>
+        </TextField>
       </Stack>
       <TextField
         size="small"

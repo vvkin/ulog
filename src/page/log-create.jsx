@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 import { Box, Paper } from '@mui/material';
 
 import { logService } from '../service/log.service';
 import { LogCreateForm } from '../component/log/log-create-form';
 
-export const LogCreate = ({ userStore }) => {
+export const LogCreatePage = observer(({ userStore }) => {
   const navigate = useNavigate();
 
   const handleLogCreate = async (data) => {
@@ -27,4 +28,4 @@ export const LogCreate = ({ userStore }) => {
       </Paper>
     </Box>
   );
-};
+});

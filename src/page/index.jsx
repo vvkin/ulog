@@ -1,38 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
 import { Stack, Divider } from '@mui/material';
 
-import { logService } from '../service/log.service';
 import { LogList } from '../component/log/log-list';
 import { LogListControls } from '../component/log/log-list-controls';
 
-export const IndexPage = ({ userStore }) => {
-  const [logs, setLogs] = useState([]);
-
+export const IndexPage = observer(({ userStore }) => {
   const handleLogSearch = async ({ query, sort }) => {
-    try {
-      const filteredLogs = await logService.searchLogsByUserId({
-        userId: userStore.id,
-        query,
-        sort,
-      });
-      setLogs(filteredLogs);
-    } catch (err) {
-      console.error(err);
-    }
+    await userStore.loadLogs({ query, sort });
   };
 
   useEffect(() => {
-    logService
-      .getLogsByUserId(userStore.id)
-      .then((logs) => setLogs(logs))
-      .catch((err) => console.error(err));
+    userStore.loadLogs({ sort: 'asc' });
   }, []);
 
   return (
     <Stack direction="column" spacing={2} sx={{ padding: '10px 0' }}>
       <LogListControls onSearch={handleLogSearch} />
       <Divider />
-      <LogList logs={logs} />
+      <LogList logs={userStore.logs} />
     </Stack>
   );
-};
+});

@@ -3,7 +3,8 @@ import { Navigate, Routes, Route, Outlet } from 'react-router-dom';
 
 import { useStore } from '../store';
 import { IndexPage } from '../page';
-import { LogCreate } from '../page/log-create';
+import { LogCreatePage } from '../page/log-create';
+import { LogPage } from '../page/log';
 import { UserHeaderPanel } from '../component/auth/user-header-panel';
 import { UserStore } from '../store/user.store';
 
@@ -31,8 +32,9 @@ export const AppPrivate = () => {
         <Route path="/" element={<IndexPage userStore={userStore} />} />
         <Route
           path="/logs/create"
-          element={<LogCreate userStore={userStore} />}
+          element={<LogCreatePage userStore={userStore} />}
         />
+        <Route path="/logs/:id" element={<LogPage userStore={userStore} />} />
       </Route>
     </Routes>
   );
