@@ -2,11 +2,13 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { logService } from '../service/log.service';
 
 export class UserStore {
-  id = null;
-  logs = [];
+  id = null
+  username = null
+  logs = []
 
   constructor(userId) {
     this.id = userId;
+    this.username = userId;
     makeAutoObservable(this, {
       id: false,
       dispose: false,

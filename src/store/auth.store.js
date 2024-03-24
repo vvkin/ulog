@@ -43,6 +43,7 @@ export const authStore = {
   isAuthenticated,
   setAuthState,
   resetAuthState,
+  loadAuthState,
   getUserId,
   getSessionId,
 };
