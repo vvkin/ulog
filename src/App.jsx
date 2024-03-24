@@ -18,7 +18,7 @@ export const App = () => {
     }
     authService
       .refreshSession(authStore.getSessionId())
-      .then(() => authStore.resetAuthState())
+      .then((state) => authStore.setAuthState(state))
       .catch(() => authStore.resetAuthState())
       .finally(() => setIsLoading(false));
   }, []);

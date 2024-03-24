@@ -10,13 +10,24 @@ const state = makeAutoObservable({
 const isAuthenticated = () => state.userId !== null;
 
 const setAuthState = ({ userId }) => {
-  state.userId = userId;
   localStorageStore.saveToStore(AUTH_STATE_KEY, JSON.stringify({ userId }));
+  saveStateToStore({ userId });
+};
+
+const saveStateToStore = (newState) => {
+  state.userId = newState.userId;
 };
 
 const resetAuthState = () => {
   state.userId = null;
   localStorageStore.removeFromStore(AUTH_STATE_KEY);
+};
+
+const loadAuthState = () => {
+  const state = localStorageStore.getFromStore(AUTH_STATE_KEY);
+  if (state) {
+    saveStateToStore(JSON.parse(state));
+  }
 };
 
 const getUserId = () => {
@@ -27,6 +38,7 @@ const getSessionId = () => {
   return state.userId;
 };
 
+loadAuthState();
 export const authStore = {
   isAuthenticated,
   setAuthState,

@@ -39,6 +39,18 @@ const getLogsByUserId = async (userId) => {
   return getLogsFromStoreByUserId(userId).map((log) => mapLogEntry(log));
 };
 
+const searchLogsByUserId = async ({ userId, query, sort }) => {
+  const allLogs = await getLogsByUserId(userId);
+  const filteredLogs = query
+    ? allLogs.filter((log) => log.title.toLowerCase().startsWith(query))
+    : allLogs;
+  if (!sort) {
+    return filteredLogs;
+  }
+  const sortMultiplier = sort === 'asc' ? 1 : -1;
+  return filteredLogs.sort((a, b) => (a.id - b.id) * sortMultiplier);
+};
+
 const getLogsFromStoreByUserId = (userId) => {
   const rawLogs = localStorageStore.getFromStore(prefixLogStoreKey(userId));
   return rawLogs ? JSON.parse(rawLogs) : [];
@@ -65,4 +77,5 @@ export const logService = {
   getPriorityOptions,
   createLog,
   getLogsByUserId,
+  searchLogsByUserId,
 };

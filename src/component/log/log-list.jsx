@@ -1,25 +1,26 @@
-import { List, Box, Typography, Divider } from '@mui/material';
-import { LogListItem } from './log-list-item';
+import { Box } from '@mui/material';
 
-export const LogsList = ({ logs }) => {
-  return logs.length !== 0 ? (
-    <List dense>
-      {logs.map((log, idx) => (
-        <li key={log.id}>
-          <LogListItem
-            id={log.id}
-            title={log.title}
-            mood={log.mood}
-            priority={log.priority}
-            date={log.date}
-          />
-          {idx !== logs.length - 1 ? <Divider /> : null}
-        </li>
-      ))}
-    </List>
-  ) : (
+import { LogListItem } from './log-list-item';
+import { PageableList } from '../shared/pageable-list';
+
+export const LogList = ({ logs }) => {
+  return (
     <Box>
-      <Typography>No logs found</Typography>
+      <PageableList
+        pageSize={10}
+        rows={logs}
+        rowMapperFn={(log) => {
+          return (
+            <LogListItem
+              id={log.id}
+              title={log.title}
+              mood={log.mood}
+              priority={log.priority}
+              date={log.date}
+            />
+          );
+        }}
+      />
     </Box>
   );
 };

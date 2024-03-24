@@ -31,7 +31,7 @@ export const LogListItem = ({ id, title, mood, priority, date }) => {
             <LogPriority name={priority} />
           </Grid>
           <Grid item xs={2}>
-            {date}
+            {new Date(date).toLocaleString()}
           </Grid>
         </Grid>
       </ListItemText>
