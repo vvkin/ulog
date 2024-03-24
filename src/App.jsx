@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes, HashRouter } from 'react-router-dom';
 import { LinearProgress } from '@mui/material';
 
 import { AppPublic } from './app/AppPublic';
@@ -28,12 +28,12 @@ export const App = () => {
       {isLoading ? (
         <LinearProgress />
       ) : (
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route path="/auth/*" element={<AppPublic />} />
             <Route path="*" element={<AppPrivate />} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       )}
     </>
   );

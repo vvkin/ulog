@@ -29,12 +29,12 @@ export const AppPrivate = () => {
           </>
         }
       >
-        <Route path="/" element={<IndexPage userStore={userStore} />} />
+        <Route path="" element={<IndexPage userStore={userStore} />} />
         <Route
-          path="/logs/create"
+          path="logs/create"
           element={<LogCreatePage userStore={userStore} />}
         />
-        <Route path="/logs/:id" element={<LogPage userStore={userStore} />} />
+        <Route path="logs/:id" element={<LogPage userStore={userStore} />} />
       </Route>
     </Routes>
   );
