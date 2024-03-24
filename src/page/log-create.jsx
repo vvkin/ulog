@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 
 import { logService } from '../service/log.service';
 import { LogCreateForm } from '../component/log/log-create-form';
@@ -18,11 +18,13 @@ export const LogCreate = ({ userStore }) => {
 
   return (
     <Box sx={{ padding: '35px', maxWidth: '560px', margin: '0 auto' }}>
-      <LogCreateForm
-        onSubmit={handleLogCreate}
-        moodOptions={logService.getMoodOptions()}
-        priorityOptions={logService.getPriorityOptions()}
-      />
+      <Paper sx={{ padding: '36px' }} elevation={4}>
+        <LogCreateForm
+          onSubmit={handleLogCreate}
+          moodOptions={logService.getMoodOptions()}
+          priorityOptions={logService.getPriorityOptions()}
+        />
+      </Paper>
     </Box>
   );
 };

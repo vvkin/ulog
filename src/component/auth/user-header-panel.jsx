@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router';
 import { Link as ReactRouterLink } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { AppBar, Toolbar, Typography, Button, Box, Stack } from '@mui/material';
+import { EditOutlined } from '@mui/icons-material';
 
 import { useStore } from '../../store';
 import { authService } from '../../service/auth.service';
@@ -34,15 +35,18 @@ export const UserHeaderPanel = observer(({ userStore }) => {
             component={ReactRouterLink}
             to="/"
           >
-            <Typography
-              sx={{
-                fontFamily: 'default',
-                textTransform: 'uppercase',
-                fontWeight: 'medium',
-              }}
-            >
-              ULog
-            </Typography>
+            <Stack direction="row" alignItems="center" spacing={1}>
+              <EditOutlined fontSize="small" />
+              <Typography
+                sx={{
+                  fontFamily: 'default',
+                  textTransform: 'uppercase',
+                  fontWeight: 'medium',
+                }}
+              >
+                ULog
+              </Typography>
+            </Stack>
           </Box>
         </Box>
         <Stack direction="row" spacing={3} alignItems="center">

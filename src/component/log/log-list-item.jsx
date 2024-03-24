@@ -5,7 +5,7 @@ import {
   Typography,
   Grid,
 } from '@mui/material';
-import { Book } from '@mui/icons-material';
+import { BookOutlined } from '@mui/icons-material';
 import { Link as ReactRouterLink } from 'react-router-dom';
 import { LogMood } from './log-mood';
 import { LogPriority } from './log-priority';
@@ -14,7 +14,7 @@ export const LogListItem = ({ id, title, mood, priority, date }) => {
   return (
     <ListItemButton component={ReactRouterLink} to={`logs/${id}`} key={id}>
       <ListItemIcon>
-        <Book />
+        <BookOutlined />
       </ListItemIcon>
       <ListItemText>
         <Grid container alignItems="center">

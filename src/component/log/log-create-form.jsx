@@ -14,9 +14,9 @@ import { formatDateToDatetimeLocal } from '../../lib/date.utils';
 
 export const LogCreateForm = ({ onSubmit, moodOptions, priorityOptions }) => {
   const [title, setTitle] = useState('');
+  const [mood, setMood] = useState('neutral');
+  const [priority, setPriority] = useState('low');
   const [description, setDescription] = useState('');
-  const [priority, setPriority] = useState(1);
-  const [mood, setMood] = useState(1);
   const [date, setDate] = useState(formatDateToDatetimeLocal(new Date()));
 
   const handleLogCreate = async (event) => {
@@ -61,8 +61,8 @@ export const LogCreateForm = ({ onSubmit, moodOptions, priorityOptions }) => {
           value={mood}
           onChange={(e) => setMood(e.target.value)}
         >
-          {moodOptions.map(({ id, value }, idx) => (
-            <MenuItem key={idx} value={id}>
+          {moodOptions.map((value, idx) => (
+            <MenuItem key={idx} value={value}>
               <LogMood name={value} />
             </MenuItem>
           ))}
@@ -76,8 +76,8 @@ export const LogCreateForm = ({ onSubmit, moodOptions, priorityOptions }) => {
           value={priority}
           onChange={(e) => setPriority(e.target.value)}
         >
-          {priorityOptions.map(({ id, value }, idx) => (
-            <MenuItem key={idx} value={id}>
+          {priorityOptions.map((value, idx) => (
+            <MenuItem key={idx} value={value}>
               <LogPriority name={value} />
             </MenuItem>
           ))}

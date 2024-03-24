@@ -14,11 +14,6 @@ const login = async ({ login, password }) => {
 };
 
 // eslint-disable-next-line no-unused-vars
-const loginViaRecent = async ({ sessionId }) => {
-  // no-op
-};
-
-// eslint-disable-next-line no-unused-vars
 const refreshSession = async (sessionId) => {
   // no-op
 };

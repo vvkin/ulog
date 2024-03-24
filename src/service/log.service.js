@@ -1,4 +1,5 @@
 import { logData } from '../data/log.data';
+import { mockData } from '../data/mock.data';
 import { localStorageStore } from '../store/local-storage.store';
 
 const getMoodOptions = () => {
@@ -36,7 +37,10 @@ const createLog = async ({
 };
 
 const getLogsByUserId = async (userId) => {
-  return getLogsFromStoreByUserId(userId).map((log) => mapLogEntry(log));
+  if (userId === 'admin') {
+    return mockData.LOG_ENTRIES;
+  }
+  return getLogsFromStoreByUserId(userId);
 };
 
 const searchLogsByUserId = async ({ userId, query, sort }) => {
@@ -55,20 +59,6 @@ const getLogsFromStoreByUserId = (userId) => {
   const rawLogs = localStorageStore.getFromStore(prefixLogStoreKey(userId));
   return rawLogs ? JSON.parse(rawLogs) : [];
 };
-
-const getMoodById = (id) => {
-  return logData.LOG_MOOD_OPTIONS.find((e) => e.id === id).value;
-};
-
-const getPriorityById = (id) => {
-  return logData.LOG_PRIORITY_OPTIONS.find((e) => e.id === id).value;
-};
-
-const mapLogEntry = (log) => ({
-  ...log,
-  mood: getMoodById(log.mood),
-  priority: getPriorityById(log.priority),
-});
 
 const prefixLogStoreKey = (userId) => `${CREATED_LOG_STORE_KEY}-${userId}`;
 

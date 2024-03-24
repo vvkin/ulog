@@ -7,7 +7,7 @@ import { authStore } from '../../store/auth.store';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
-  const [login, setLogin] = useState(null);
+  const [login, setLogin] = useState('');
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -23,10 +23,7 @@ export const LoginForm = () => {
   return (
     <Box
       sx={{
-        width: '350px',
-        padding: '25px',
         margin: '0 auto',
-        border: 1,
       }}
     >
       <Box
