@@ -27,7 +27,7 @@ export const AppPrivate = () => {
           </>
         }
       >
-        <Route path="/" element={<IndexPage />} />
+        <Route path="/" element={<IndexPage userStore={userStore} />} />
       </Route>
     </Routes>
   );

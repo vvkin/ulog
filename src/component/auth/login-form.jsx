@@ -48,7 +48,7 @@ export const LoginForm = () => {
             onChange={(e) => setLogin(e.target.value.trim())}
             autoComplete="email"
           />
-          <Button type="submit" variant="contained" fullWidth>
+          <Button type="submit" variant="outlined" fullWidth>
             Login
           </Button>
         </FormGroup>
