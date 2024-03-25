@@ -20,7 +20,7 @@ const createLog = async ({
   description,
   date,
 }) => {
-  const currentLogs = getLogsFromStoreByUserId(userId);
+  const currentLogs = await getLogsByUserId(userId);
   const newLog = {
     id: currentLogs.length + 1,
     title,
@@ -30,16 +30,10 @@ const createLog = async ({
     date,
   };
   const newLogs = [...currentLogs, newLog];
-  localStorageStore.saveToStore(
-    prefixLogStoreKey(userId),
-    JSON.stringify(newLogs),
-  );
+  saveLogsToStoreByUserId(userId, newLogs);
 };
 
 const getLogsByUserId = async (userId) => {
-  if (userId === 'admin') {
-    return mockData.LOG_ENTRIES;
-  }
   return getLogsFromStoreByUserId(userId);
 };
 
@@ -65,7 +59,23 @@ const getLogsFromStoreByUserId = (userId) => {
   return rawLogs ? JSON.parse(rawLogs) : [];
 };
 
+const saveLogsToStoreByUserId = (userId, logs) => {
+  localStorageStore.saveToStore(
+    prefixLogStoreKey(userId),
+    JSON.stringify(logs),
+  );
+};
+
 const prefixLogStoreKey = (userId) => `${CREATED_LOG_STORE_KEY}-${userId}`;
+
+const loadAdminLogs = async () => {
+  const userId = 'admin';
+  const adminLogs = await getLogsByUserId('admin');
+  if (adminLogs.length === 0) {
+    saveLogsToStoreByUserId(userId, mockData.LOG_ENTRIES);
+  }
+};
+loadAdminLogs();
 
 export const logService = {
   getMoodOptions,
