@@ -32,7 +32,7 @@ export class LogStore {
       this.title = log.title;
       this.mood = log.mood;
       this.priority = log.priority;
-      this.date = new Date(log.date);
+      this.date = log.date;
       this.description = log.description;
     });
   }

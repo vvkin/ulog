@@ -82,8 +82,8 @@ export const LogCreateForm = ({ onSubmit, moodOptions, priorityOptions }) => {
         size="small"
         fullWidth
         multiline
-        minRows={10}
-        maxRows={10}
+        minRows={7}
+        maxRows={7}
         id="log__create__description"
         label="What's it about?"
         type="text"

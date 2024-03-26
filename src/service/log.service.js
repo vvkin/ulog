@@ -34,7 +34,7 @@ const createLog = async ({
 };
 
 const getLogsByUserId = async (userId) => {
-  return getLogsFromStoreByUserId(userId);
+  return getLogsFromStoreByUserId(userId).map((log) => mapLog(log));
 };
 
 const searchLogsByUserId = async ({ userId, query, sort }) => {
@@ -46,13 +46,21 @@ const searchLogsByUserId = async ({ userId, query, sort }) => {
       )
     : allLogs;
   const sortMultiplier = sort === 'asc' ? 1 : -1;
-  return filteredLogs.sort((a, b) => (a.id - b.id) * sortMultiplier);
+  return filteredLogs.sort(
+    (a, b) => (a.date.getTime() - b.date.getTime()) * sortMultiplier,
+  );
 };
 
 const getLogById = async ({ logId, userId }) => {
   const allLogs = await getLogsByUserId(userId);
-  return allLogs.find((log) => log.id === logId) ?? null;
+  const log = allLogs.find((log) => log.id === logId);
+  return log ? mapLog(log) : null;
 };
+
+const mapLog = (log) => ({
+  ...log,
+  date: new Date(log.date),
+});
 
 const getLogsFromStoreByUserId = (userId) => {
   const rawLogs = localStorageStore.getFromStore(prefixLogStoreKey(userId));

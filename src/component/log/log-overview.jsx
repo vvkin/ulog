@@ -64,7 +64,7 @@ export const LogOverview = ({ logStore }) => {
         value={logStore.description}
         label="Description"
         type="text"
-        maxRows={8}
+        maxRows={5}
         InputProps={{ readOnly: true }}
       />
     </Stack>
